@@ -128,22 +128,7 @@ pitchers = [
     "Jake Westbrook", "Justin Masterson", "Brad Penny", "Aaron Cook", "Jon Rauch",
     "Chris Volstad", "Tom Gorzelanny", "Carlos Marmol", "George Kontos", "Blake Beavan",
     "Paul Maholm", "Brad Lincoln", "Felipe Paulino", "Jarrod Parker", "Nick Blackburn",
-    "Clayton Blackburn", "Jaime Barria", "Wilmer Flores", "Andrew Triggs", "Ryan Weber",
-    "Tyler Skaggs", "Sean O'Sullivan", "Drew Storen", "Scott Carroll", "Logan Ondrusek",
-    "Josh Outman", "Lucas Harrell", "Henderson Alvarez", "Esmerling Vasquez", "Dustin Moseley",
-    "Luis Mendoza", "David Hernandez", "Brandon Beachy", "Tom Wilhelmsen", "Brian Duensing",
-    "Kyle Lobstein", "Ross Ohlendorf", "Alfredo Aceves", "Luis Cruz", "Zach Stewart",
-    "Brian Wilson", "Tyler Thornburg", "Andrew Bailey", "Jeff Karstens", "Dallas Braden",
-    "Jason Schmidt", "Aaron Heilman", "Armando Galarraga", "Barry Zito", "Kyle Farnsworth",
-    "Jonathan Sánchez", "Cory Lidle", "Kevin Correia", "Freddy García", "Chien-Ming Wang",
-    "Mike Pelfrey", "Vicente Padilla", "Sidney Ponson", "Jason Jennings", "Jorge Sosa",
-    "Byung-Hyun Kim", "Cliff Politte", "Jeff Weaver", "Julio Teheran", "Vladimir Nunez",
-    "Tony Armas Jr.", "Esteban Loaiza", "John Parrish", "Chris Sampson", "Frank Francisco",
-    "Matt Albers", "Bobby Jenks", "Octavio Dotel", "Bruce Chen", "Miguel Batista",
-    "Horacio Ramírez", "Tim Redding", "R.A. Dickey", "Joel Hanrahan", "Kyle Kendrick",
-    "Ryan Vogelsong", "Dan Wheeler", "Mark Prior", "Brad Hennessey", "Jason Isringhausen",
-    "Matt Capps", "Todd Coffey", "Brian Bannister", "Chan Ho Park", "Scott Kazmir",
-    "Jorge Julio", "Clay Meredith", "Dan Meyer", "Carlos Silva", "Kelvim Escobar"
+    "Clayton Blackburn", "Jaime Barria", "Wilmer Flores", "Andrew Triggs", "Ryan Weber"
 ]
 
 
@@ -175,6 +160,9 @@ def download_all_injured_players_data():
         player_id = str(int(id))
         print(i, player_id, name, year)
         data = statcast_pitcher(str(year-1)+'-01-01', str(year)+'-01-01', player_id=id)
+        while len(data) == 0 and year >= 2017:
+            year -= 1
+            data = statcast_pitcher(str(year-1)+'-01-01', str(year)+'-01-01', player_id=id)
         csv_file_name= './.data/injured/'+player_id+"-"+name+"-"+str(year)+".csv"
         print("csv_file_name=", csv_file_name)  
         data.to_csv(csv_file_name)
@@ -209,6 +197,9 @@ def download_all_healthy_players_data():
         player_id = str(int(id))
         print(i, player_id, name, year)
         data = statcast_pitcher(str(year-1)+'-01-01', str(year)+'-01-01', player_id=id)
+        while len(data) == 0 and year >= 2017:
+            year -= 1
+            data = statcast_pitcher(str(year-1)+'-01-01', str(year)+'-01-01', player_id=id)
         csv_file_name= './.data/healthy/'+player_id+"-"+name+"-"+str(year)+".csv"
         print("csv_file_name=", csv_file_name)  
         data.to_csv(csv_file_name)
