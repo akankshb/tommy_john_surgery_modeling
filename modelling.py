@@ -8,8 +8,8 @@ import seaborn as sns
 from pybaseball import player_search_list
 import random
 import os
-healthy_path = "/Users/akankshborah/tjs_repo/tommy_john_surgery_modeling/.data/healthy/"
-injured_path = "/Users/akankshborah/tjs_repo/tommy_john_surgery_modeling/.data/injured/"
+healthy_path = "./.data/healthy/"
+injured_path = "./.data/injured/"
 healthy = {}
 injured = {}
 def valuegen_healthy(file):
