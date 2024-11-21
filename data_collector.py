@@ -118,17 +118,7 @@ pitchers = [
     "Craig Stammen", "Joe Nathan", "Ryan Pressly", "Javier López", "Tommy Hunter",
     "Tony Watson", "Neftalí Feliz", "Phil Coke", "Dillon Gee", "Boone Logan",
     "Brad Ziegler", "Kevin Jepsen", "Chris Hatcher", "Tim Collins", "Jason Marquis",
-    "Tyler Lyons", "Jerry Blevins", "Carlos Villanueva", "Matt Garza", "Brett Cecil",
-    "Erasmo Ramírez", "Jorge de la Rosa", "Aaron Harang", "Vin Mazzaro", "Michael Lorenzen",
-    "Antonio Bastardo", "Ryan Dempster", "J.A. Happ", "Mark Buehrle", "Ross Detwiler",
-    "Pat Neshek", "Eric O'Flaherty", "Joel Peralta", "Vicente Padilla", "Eddie Guardado",
-    "Jeff Francis", "Zach Duke", "Andrew Chafin", "Mike Adams", "Luis Perdomo",
-    "Randy Choate", "Chris Perez", "Tom Gorzelanny", "Aaron Crow", "Ricky Romero",
-    "Scott Baker", "Daisuke Matsuzaka", "Kerry Wood", "Rich Harden", "Shaun Marcum",
-    "Jake Westbrook", "Justin Masterson", "Brad Penny", "Aaron Cook", "Jon Rauch",
-    "Chris Volstad", "Tom Gorzelanny", "Carlos Marmol", "George Kontos", "Blake Beavan",
-    "Paul Maholm", "Brad Lincoln", "Felipe Paulino", "Jarrod Parker", "Nick Blackburn",
-    "Clayton Blackburn", "Jaime Barria", "Wilmer Flores", "Andrew Triggs", "Ryan Weber"
+    "Tyler Lyons", "Jerry Blevins", "Carlos Villanueva", "Matt Garza", "Brett Cecil"
 ]
 
 
@@ -163,9 +153,10 @@ def download_all_injured_players_data():
         while len(data) == 0 and year >= 2017:
             year -= 1
             data = statcast_pitcher(str(year-1)+'-01-01', str(year)+'-01-01', player_id=id)
-        csv_file_name= './.data/injured/'+player_id+"-"+name+"-"+str(year)+".csv"
-        print("csv_file_name=", csv_file_name)  
-        data.to_csv(csv_file_name)
+        if len(data) != 0:
+            csv_file_name= './.data/injured/'+player_id+"-"+name+"-"+str(year)+".csv"
+            print("csv_file_name=", csv_file_name)  
+            data.to_csv(csv_file_name)
         i+=1
 
 def download_all_healthy_players_data():
@@ -200,9 +191,10 @@ def download_all_healthy_players_data():
         while len(data) == 0 and year >= 2017:
             year -= 1
             data = statcast_pitcher(str(year-1)+'-01-01', str(year)+'-01-01', player_id=id)
-        csv_file_name= './.data/healthy/'+player_id+"-"+name+"-"+str(year)+".csv"
-        print("csv_file_name=", csv_file_name)  
-        data.to_csv(csv_file_name)
+        if len(data) != 0:
+            csv_file_name= './.data/healthy/'+player_id+"-"+name+"-"+str(year)+".csv"
+            print("csv_file_name=", csv_file_name)  
+            data.to_csv(csv_file_name)
         i+=1
 
 
