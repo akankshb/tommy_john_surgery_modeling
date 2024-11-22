@@ -16,7 +16,6 @@ def valuegen_healthy(file):
     data = pd.read_csv(file)
     name = data['player_name']
     player_id = data.loc[0, 'pitcher']
-    print(player_id)
     Fastballs = data.loc[data['pitch_type'].isin(['FF', 'SI'])]
     FF = data.loc[data['pitch_type'].isin(['FF'])]
     SI = data.loc[data['pitch_type'].isin(['SI'])]
@@ -75,3 +74,99 @@ print(len(healthy))
 print(len(injured))
 
 
+plt.figure()
+for key in healthy.keys():
+  set = healthy[key][8]
+  # set.plot.scatter(x='release_speed', y='release_spin_rate', title = "Fastball vs Spin rate Data for Tommy John")
+  sns.scatterplot(data = set, x = 'release_speed', y= 'release_spin_rate', alpha = 0.75, c = 'Green')
+plt.title("Fastball velocity vs Spin rate Data for Healthy")
+plt.xlim(85, 120)
+# plt.show()
+
+plt.figure()
+for key in healthy.keys():
+  set = healthy[key][16]
+  sns.scatterplot(data = set, x = 'release_speed', y= 'release_spin_rate', alpha = 0.75, c = 'Red')
+plt.title("Offspeed velocity vs Spin rate Data for Healthy")
+plt.xlim(60, 95)
+plt.figure()
+for key in healthy.keys():
+  set = healthy[key][8]
+  sns.scatterplot(data = set, x = 'release_speed', y= 'release_pos_z', alpha = 0.75, c = 'Green')
+plt.title("Fastball Velocity vs Release Height Data for healthy")
+plt.xlim(85, 120)
+
+plt.figure()
+for key in healthy.keys():
+  set = healthy[key][16]
+  sns.scatterplot(data = set, x = 'release_speed', y= 'release_pos_z', alpha = 0.75, c = 'Red')
+plt.title("Offspeed Velocity vs Release Height Data for healthy")
+plt.xlim(60, 95)
+
+plt.show()
+
+
+
+
+healthy_Fastball_data = []
+Fastball_data = []
+for key in healthy.keys():
+  x = healthy[key][7]
+  y = []
+  for i in x.values:
+    y.append(0)
+  z = x.assign(TJ = y)
+  healthy_Fastball_data.append(z)
+  Fastball_data.append(z)
+injured_Fastball_data = []
+for key in injured.keys():
+  x = injured[key][7]
+  y = []
+  for i in x.values:
+    y.append(1)
+  z = x.assign(TJ = y)
+  injured_Fastball_data.append(z)
+  Fastball_data.append(z)
+# for key in unhealthy.keys():
+#   x = unhealthy[key][8]
+#   Fastball_data.append(x)
+Healthy_df = pd.concat(healthy_Fastball_data)
+Injured_df = pd.concat(injured_Fastball_data)
+Tot_Fastball_data = pd.concat(Fastball_data)
+Tot_Fastball_data.shape
+
+plt.plot()
+Injured_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Velocity', density = True)
+Healthy_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Velocity', density = True)
+plt.xlabel("Velocity")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Release Height', density = True)
+Healthy_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Release Height', density = True)
+plt.xlabel("Release Height")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Spin Rate', density = True)
+Healthy_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Regular Pitchers Spin Rate', density = True)
+plt.xlabel("Spin Rate")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_df['release_extension'].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Extension', density = True)
+Healthy_df['release_extension'].hist(bins = 40, alpha = 0.7, label = 'Regular Pitchers Extension', density = True)
+plt.xlabel("Extension")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Fastball Spin Axis', density = True)
+Healthy_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Regular Pitchers Fastball Spin Axis', density = True)
+plt.xlabel("Axis")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
