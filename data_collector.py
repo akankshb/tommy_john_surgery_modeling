@@ -104,21 +104,7 @@ pitchers = [
     "Scott Kazmir", "Dan Straily", "Ubaldo Jiménez", "Michael Pineda", "Robbie Erlin",
     "Tyler Chatwood", "Chris Young", "Joe Kelly", "A.J. Griffin", "Trevor May",
     "Mat Latos", "Colby Lewis", "Aaron Sanchez", "Doug Fister", "Jaime Garcia",
-    "Scott Feldman", "Drew Pomeranz", "Nathan Eovaldi", "Sean Newcomb", "Alex Cobb",
-    "Trevor Hildenberger", "Jake McGee", "Dan Otero", "Bud Norris", "Clayton Richard",
-    "Brandon McCarthy", "Doug Davis", "Logan Morrison", "Brandon Kintzler", "Adam Morgan",
-    "Ty Blach", "Rafael Montero", "Miguel Castro", "Kyle Barraclough", "Matt Andriese",
-    "Ryan Madson", "Fernando Rodney", "Sergio Romo", "Hunter Strickland", "Tyson Ross",
-    "Brian Matusz", "Luis Avilán", "Jesse Chavez", "Tom Koehler", "Heath Hembree",
-    "Luke Hochevar", "Blake Treinen", "Mark Melancon", "David Phelps", "Hector Santiago",
-    "Jeremy Guthrie", "Ryan Buchter", "Vance Worley", "Chris Capuano", "Wilmer Font",
-    "Pedro Baez", "Dustin McGowan", "Jim Johnson", "Jhoulys Chacín", "Oliver Pérez",
-    "Jason Hammel", "Nick Tropeano", "Francisco Rodríguez", "Scott Downs", "Zach Britton",
-    "Chase Anderson", "Randy Dobnak", "Joakim Soria", "Jake Peavy", "Mike Montgomery",
-    "Craig Stammen", "Joe Nathan", "Ryan Pressly", "Javier López", "Tommy Hunter",
-    "Tony Watson", "Neftalí Feliz", "Phil Coke", "Dillon Gee", "Boone Logan",
-    "Brad Ziegler", "Kevin Jepsen", "Chris Hatcher", "Tim Collins", "Jason Marquis",
-    "Tyler Lyons", "Jerry Blevins", "Carlos Villanueva", "Matt Garza", "Brett Cecil"
+    "Scott Feldman", "Drew Pomeranz", "Nathan Eovaldi", "Sean Newcomb", "Alex Cobb"
 ]
 
 
