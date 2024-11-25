@@ -302,3 +302,172 @@ plt.ylabel("Frequency")
 plt.legend()
 plt.show()
 
+
+healthy_CH_data = []
+for key in healthy.keys():
+  x = healthy[key][11]
+  y = []
+  for i in x.values:
+    y.append(0)
+  z = x.assign(TJ = y)
+  healthy_CH_data.append(z)
+injured_CH_data = []
+for key in injured.keys():
+  x = injured[key][11]
+  y = []
+  for i in x.values:
+    y.append(1)
+  z = x.assign(TJ = y)
+  injured_CH_data.append(z)
+
+Healthy_CH_df = pd.concat(healthy_CH_data)
+Injured_CH_df = pd.concat(injured_CH_data)
+
+plt.plot()
+Injured_CH_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Changeup Velocity', color = 'slateblue', density = True)
+Healthy_CH_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Changeup Velocity', color = 'crimson', density = True)
+plt.xlabel("Velocity")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_CH_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Changeup Release Height', color = 'slateblue', density = True)
+Healthy_CH_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Changeup Release Height', color = 'crimson', density = True)
+plt.xlabel("Release Height")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_CH_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Changeup Spin Rate', color = 'slateblue', density = True)
+Healthy_CH_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Regular Pitchers Changeup Spin Rate', color = 'crimson', density = True)
+plt.xlabel("Spin Rate")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_CH_df['release_extension'].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Changeup Extension', color = 'slateblue', density = True)
+Healthy_CH_df['release_extension'].hist(bins = 40, alpha = 0.7, label = 'Regular Pitchers Changeup Extension', color = 'crimson', density = True)
+plt.xlabel("Extension")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_CH_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Changeup Spin Axis', color = 'slateblue', density = True)
+Healthy_CH_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Regular Pitchers Changeup Spin Axis', color = 'crimson', density = True)
+plt.xlabel("Axis")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+
+healthy_SPL_data = []
+for key in healthy.keys():
+  x = healthy[key][12]
+  y = []
+  for i in x.values:
+    y.append(0)
+  z = x.assign(TJ = y)
+  healthy_SPL_data.append(z)
+injured_SPL_data = []
+for key in injured.keys():
+  x = injured[key][12]
+  y = []
+  for i in x.values:
+    y.append(1)
+  z = x.assign(TJ = y)
+  injured_SPL_data.append(z)
+
+Healthy_SPL_df = pd.concat(healthy_SPL_data)
+Injured_SPL_df = pd.concat(injured_SPL_data)
+
+plt.plot()
+Injured_SPL_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Splitter Velocity', density = True)
+Healthy_SPL_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Splitter Velocity', density = True)
+plt.xlabel("Velocity")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_SPL_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Splitter Release Height', density = True)
+Healthy_SPL_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Splitter Release Height', density = True)
+plt.xlabel("Release Height")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_SPL_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Splitter Spin Rate', density = True)
+Healthy_SPL_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Regular Pitchers Splitter Spin Rate', density = True)
+plt.xlabel("Spin Rate")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_SPL_df['release_extension'].hist(bins = 20, alpha = 0.7, label = 'Tommy John Pitcher Splitter Extension', density = True)
+Healthy_SPL_df['release_extension'].hist(bins = 20, alpha = 0.7, label = 'Regular Pitchers Splitter Extension', density = True)
+plt.xlabel("Extension")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_SPL_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Splitter Spin Axis', density = True)
+Healthy_SPL_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Regular Pitchers Splitter Spin Axis', density = True)
+plt.xlabel("Axis")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+
+healthy_slider_data = []
+for key in healthy.keys():
+  x = healthy[key][13]
+  y = []
+  for i in x.values:
+    y.append(0)
+  z = x.assign(TJ = y)
+  healthy_slider_data.append(z)
+
+injured_slider_data = []
+for key in injured.keys():
+  x = injured[key][13]
+  y = []
+  for i in x.values:
+    y.append(1)
+  z = x.assign(TJ = y)
+  injured_slider_data.append(z)
+Healthy_slider_df = pd.concat(healthy_slider_data)
+Injured_slider_df = pd.concat(injured_slider_data)
+
+plt.plot()
+Injured_slider_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Slider Velocity', color = 'slateblue', density = True)
+Healthy_slider_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Slider Velocity', color = 'crimson', density = True)
+plt.xlabel("Velocity")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_slider_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Slider Release Height', color = 'slateblue', density = True)
+Healthy_slider_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Slider Release Height', color = 'crimson', density = True)
+plt.xlabel("Release Height")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_slider_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Slider Spin Rate', color = 'slateblue', density = True)
+Healthy_slider_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Regular Pitchers Slider Spin Rate', color = 'crimson', density = True)
+plt.xlabel("Spin Rate")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_slider_df['release_extension'].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Slider Extension', color = 'slateblue', density = True)
+Healthy_slider_df['release_extension'].hist(bins = 40, alpha = 0.7, label = 'Regular Pitchers Slider Extension', color = 'crimson', density = True)
+plt.xlabel("Extension")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_slider_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Slider Spin Axis', color = 'slateblue', density  = True)
+Healthy_slider_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Regular Pitchers Slider Spin Axis', color = 'crimson', density = True)
+plt.xlabel("Axis")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+
