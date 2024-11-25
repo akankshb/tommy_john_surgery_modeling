@@ -471,3 +471,231 @@ plt.ylabel("Frequency")
 plt.legend()
 plt.show()
 
+healthy_SWP_data = []
+for key in healthy.keys():
+  x = healthy[key][14]
+  y = []
+  for i in x.values:
+    y.append(0)
+  z = x.assign(TJ = y)
+  healthy_SWP_data.append(z)
+injured_SWP_data = []
+for key in injured.keys():
+  x = injured[key][14]
+  y = []
+  for i in x.values:
+    y.append(1)
+  z = x.assign(TJ = y)
+  injured_SWP_data.append(z)
+
+Healthy_SWP_df = pd.concat(healthy_SWP_data)
+Injured_SWP_df = pd.concat(injured_SWP_data)
+
+plt.plot()
+Injured_SWP_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher SWP Velocity', color = 'Green', density = True)
+Healthy_SWP_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers SWP Velocity', color = 'Red', density = True)
+plt.xlabel("Velocity")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_SWP_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher SWP Release Height', color = 'Green', density = True)
+Healthy_SWP_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers SWP Release Height', color = 'Red', density = True)
+plt.xlabel("Release Height")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_SWP_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher SWP Spin Rate', color = 'Green', density = True)
+Healthy_SWP_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Regular Pitchers SWP Spin Rate', color = 'Red', density = True)
+plt.xlabel("Spin Rate")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_SWP_df['release_extension'].hist(bins = 20, alpha = 0.7, label = 'Tommy John Pitcher SWP Extension', color = 'Green', density = True)
+Healthy_SWP_df['release_extension'].hist(bins = 20, alpha = 0.7, label = 'Regular Pitchers SWP Extension', color = 'Red', density = True)
+plt.xlabel("Extension")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_SWP_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher SWP Spin Axis', color = 'Green', density = True)
+Healthy_SWP_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Regular Pitchers SWP Spin Axis', color = 'Red', density = True)
+plt.xlabel("Axis")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+
+healthy_CU_data = []
+for key in healthy.keys():
+  x = healthy[key][15]
+  y = []
+  for i in x.values:
+    y.append(0)
+  z = x.assign(TJ = y)
+  healthy_CU_data.append(z)
+injured_CU_data = []
+for key in injured.keys():
+  x = injured[key][15]
+  y = []
+  for i in x.values:
+    y.append(1)
+  z = x.assign(TJ = y)
+  injured_CU_data.append(z)
+
+Healthy_CU_df = pd.concat(healthy_CU_data)
+Injured_CU_df = pd.concat(injured_CU_data)
+
+plt.plot()
+Injured_CU_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Curveball Velocity', color = 'slateblue', density = True)
+Healthy_CU_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Curveball Velocity', color = 'crimson', density = True)
+plt.xlabel("Velocity")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_CU_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Curveball Release Height', color = 'slateblue', density = True)
+Healthy_CU_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Curveball Release Height', color = 'crimson', density = True)
+plt.xlabel("Release Height")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_CU_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Curveball Spin Rate', color = 'slateblue', density = True)
+Healthy_CU_df['release_spin_rate'].hist(bins = 40, alpha = 0.7, label = 'Regular Pitchers Curveball Spin Rate', color = 'crimson', density = True)
+plt.xlabel("Spin Rate")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_CU_df['release_extension'].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Curveball Extension', color = 'slateblue', density = True)
+Healthy_CU_df['release_extension'].hist(bins = 30, alpha = 0.7, label = 'Regular Pitchers Curveball Extension', color = 'crimson', density = True)
+plt.xlabel("Extension")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+plt.plot()
+Injured_CU_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Curveball Spin Axis', color = 'slateblue', density = True)
+Healthy_CU_df['spin_axis'].hist(bins = 30, alpha = 0.7, label = 'Regular Pitchers Curveball Spin Axis', color = 'crimson', density = True)
+plt.xlabel("Axis")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+
+healthy_fastball_percentages = []
+for key in healthy.keys():
+  x = len(healthy[key][1])
+  y = len(healthy[key][7])
+  try:
+    percentage = y/x *100
+  except:
+    percentage = 0
+  if percentage != 0:
+    healthy_fastball_percentages.append(percentage)
+injured_fastball_percentages = []
+for key in injured.keys():
+  x = len(injured[key][1])
+  y = len(injured[key][7])
+  try:
+    percentage = y/x *100
+  except ZeroDivisionError:
+    percentage = 0
+  if percentage != 0:
+    injured_fastball_percentages.append(percentage)
+Healthy_Fastball_percentage_df = pd.DataFrame(healthy_fastball_percentages)
+Injured_Fastball_percentage_df = pd.DataFrame(injured_fastball_percentages)
+
+plt.plot()
+Healthy_Fastball_percentage_df[0].hist(bins = 30, alpha= 0.7, label = 'Healthy Pitcher Fastball Percentage', density = True)
+Injured_Fastball_percentage_df[0].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Fastball Percentage', density = True)
+plt.legend()
+plt.show()
+
+healthy_SL_percentages = []
+for key in healthy.keys():
+  x = len(healthy[key][1])
+  y = len(healthy[key][13])
+  try:
+    percentage = y/x *100
+  except:
+    percentage = 0
+  if percentage != 0:
+    healthy_SL_percentages.append(percentage)
+injured_SL_percentages = []
+for key in injured.keys():
+  x = len(injured[key][1])
+  y = len(injured[key][13])
+  try:
+    percentage = y/x *100
+  except ZeroDivisionError:
+    percentage = 0
+  if percentage != 0:
+      injured_SL_percentages.append(percentage)
+Healthy_SL_percentage_df = pd.DataFrame(healthy_SL_percentages)
+Injured_SL_percentage_df = pd.DataFrame(injured_SL_percentages)
+
+plt.plot()
+Healthy_SL_percentage_df[0].hist(bins = 40, alpha= 0.7, label = 'Healthy Pitcher Slider Percentage', density = True)
+Injured_SL_percentage_df[0].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Slider Percentage', density = True)
+plt.legend()
+plt.show()
+
+healthy_SWP_percentages = []
+for key in healthy.keys():
+  x = len(healthy[key][1])
+  y = len(healthy[key][14])
+  try:
+    percentage = y/x *100
+  except:
+    percentage = 0
+  if percentage != 0:
+    healthy_SWP_percentages.append(percentage)
+injured_SWP_percentages = []
+for key in injured.keys():
+  x = len(injured[key][1])
+  y = len(injured[key][14])
+  try:
+    percentage = y/x *100
+  except ZeroDivisionError:
+    percentage = 0
+  if percentage != 0:
+      injured_SWP_percentages.append(percentage)
+Healthy_SWP_percentage_df = pd.DataFrame(healthy_SWP_percentages)
+Injured_SWP_percentage_df = pd.DataFrame(injured_SWP_percentages)
+
+
+plt.plot()
+Healthy_SWP_percentage_df[0].hist(bins = 40, alpha= 0.7, label = 'Healthy Pitcher Sweeper Percentage', density = True)
+Injured_SWP_percentage_df[0].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Sweeper Percentage', density = True)
+plt.legend()
+plt.show()
+
+healthy_SPL_percentages = []
+for key in healthy.keys():
+  x = len(healthy[key][1])
+  y = len(healthy[key][14])
+  try:
+    percentage = y/x *100
+  except:
+    percentage = 0
+  if percentage != 0:
+    healthy_SPL_percentages.append(percentage)
+injured_SPL_percentages = []
+for key in injured.keys():
+  x = len(injured[key][1])
+  y = len(injured[key][14])
+  try:
+    percentage = y/x *100
+  except ZeroDivisionError:
+    percentage = 0
+  if percentage != 0:
+      injured_SPL_percentages.append(percentage)
+Healthy_SPL_percentage_df = pd.DataFrame(healthy_SPL_percentages)
+Injured_SPL_percentage_df = pd.DataFrame(injured_SPL_percentages)
+
+plt.plot()
+Healthy_SPL_percentage_df[0].hist(bins = 40, alpha= 0.7, label = 'Healthy Pitcher Splitter Percentage', density = True)
+Injured_SPL_percentage_df[0].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Splitter Percentage', density = True)
+plt.legend()
+plt.show()
