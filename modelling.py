@@ -666,8 +666,8 @@ Injured_SWP_percentage_df = pd.DataFrame(injured_SWP_percentages)
 
 
 plt.plot()
-Healthy_SWP_percentage_df[0].hist(bins = 40, alpha= 0.7, label = 'Healthy Pitcher Sweeper Percentage', density = True)
-Injured_SWP_percentage_df[0].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Sweeper Percentage', density = True)
+Healthy_SWP_percentage_df[0].hist(bins = 10, alpha= 0.7, label = 'Healthy Pitcher Sweeper Percentage', density = True)
+Injured_SWP_percentage_df[0].hist(bins = 10, alpha = 0.7, label = 'Tommy John Pitcher Sweeper Percentage', density = True)
 plt.legend()
 plt.show()
 
@@ -695,7 +695,36 @@ Healthy_SPL_percentage_df = pd.DataFrame(healthy_SPL_percentages)
 Injured_SPL_percentage_df = pd.DataFrame(injured_SPL_percentages)
 
 plt.plot()
-Healthy_SPL_percentage_df[0].hist(bins = 40, alpha= 0.7, label = 'Healthy Pitcher Splitter Percentage', density = True)
-Injured_SPL_percentage_df[0].hist(bins = 40, alpha = 0.7, label = 'Tommy John Pitcher Splitter Percentage', density = True)
+Healthy_SPL_percentage_df[0].hist(bins = 10, alpha= 0.7, label = 'Healthy Pitcher Splitter Percentage', density = True)
+Injured_SPL_percentage_df[0].hist(bins = 10, alpha = 0.7, label = 'Tommy John Pitcher Splitter Percentage', density = True)
+plt.legend()
+plt.show()
+
+healthy_SI_percentages = []
+for key in healthy.keys():
+  x = len(healthy[key][1])
+  y = len(healthy[key][9])
+  try:
+    percentage = y/x *100
+  except:
+    percentage = 0
+  if percentage != 0:
+    healthy_SI_percentages.append(percentage)
+injured_SI_percentages = []
+for key in injured.keys():
+  x = len(injured[key][1])
+  y = len(injured[key][9])
+  try:
+    percentage = y/x *100
+  except ZeroDivisionError:
+    percentage = 0
+  if percentage != 0:
+      injured_SI_percentages.append(percentage)
+Healthy_SI_percentage_df = pd.DataFrame(healthy_SI_percentages)
+Injured_SI_percentage_df = pd.DataFrame(injured_SI_percentages)
+
+plt.plot()
+Healthy_SI_percentage_df[0].hist(bins = 30, alpha= 0.7, label = 'Healthy Pitcher Sinker Percentage', density = True)
+Injured_SI_percentage_df[0].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Sinker Percentage', density = True)
 plt.legend()
 plt.show()
