@@ -266,6 +266,9 @@ for key in injured.keys():
 Healthy_FC_df = pd.concat(healthy_FC_data)
 Injured_FC_df = pd.concat(injured_FC_data)
 
+print("Amount of Cutters Thrown by Healthy Pitchers: " + str(Healthy_FC_df.shape))
+print("Amount of Cutters Thrown by Tommy John Pitchers: "+ str(Injured_FC_df.shape))
+
 plt.plot()
 Injured_FC_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher FC Velocity', color = 'Green', density = True)
 Healthy_FC_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers FC Velocity', color = 'Red', density = True)
@@ -323,6 +326,9 @@ for key in injured.keys():
 Healthy_CH_df = pd.concat(healthy_CH_data)
 Injured_CH_df = pd.concat(injured_CH_data)
 
+print("Amount of Changeups Thrown by Healthy Pitchers: " + str(Healthy_CH_df.shape))
+print("Amount of Changeups Thrown by Tommy John Pitchers: "+ str(Injured_CH_df.shape))
+
 plt.plot()
 Injured_CH_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Changeup Velocity', color = 'slateblue', density = True)
 Healthy_CH_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Changeup Velocity', color = 'crimson', density = True)
@@ -378,6 +384,9 @@ for key in injured.keys():
 
 Healthy_SPL_df = pd.concat(healthy_SPL_data)
 Injured_SPL_df = pd.concat(injured_SPL_data)
+
+print("Amount of Splitters Thrown by Healthy Pitchers: " + str(Healthy_SPL_df.shape))
+print("Amount of Splitters Thrown by Tommy John Pitchers: "+ str(Injured_SPL_df.shape))
 
 plt.plot()
 Injured_SPL_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Splitter Velocity', density = True)
@@ -435,6 +444,9 @@ for key in injured.keys():
 Healthy_slider_df = pd.concat(healthy_slider_data)
 Injured_slider_df = pd.concat(injured_slider_data)
 
+print("Amount of Sliders Thrown by Healthy Pitchers: " + str(Healthy_slider_df.shape))
+print("Amount of Sliders Thrown by Tommy John Pitchers: "+ str(Injured_slider_df.shape))
+
 plt.plot()
 Injured_slider_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Slider Velocity', color = 'slateblue', density = True)
 Healthy_slider_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Slider Velocity', color = 'crimson', density = True)
@@ -491,6 +503,9 @@ for key in injured.keys():
 Healthy_SWP_df = pd.concat(healthy_SWP_data)
 Injured_SWP_df = pd.concat(injured_SWP_data)
 
+print("Amount of Sweepers Thrown by Healthy Pitchers: " + str(Healthy_SWP_df.shape))
+print("Amount of Sweepers Thrown by Tommy John Pitchers: "+ str(Injured_SWP_df.shape))
+
 plt.plot()
 Injured_SWP_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher SWP Velocity', color = 'Green', density = True)
 Healthy_SWP_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers SWP Velocity', color = 'Red', density = True)
@@ -546,6 +561,9 @@ for key in injured.keys():
 
 Healthy_CU_df = pd.concat(healthy_CU_data)
 Injured_CU_df = pd.concat(injured_CU_data)
+
+print("Amount of Curveballs Thrown by Healthy Pitchers: " + str(Healthy_CU_df.shape))
+print("Amount of Curveballs Thrown by Tommy John Pitchers: "+ str(Injured_CU_df.shape))
 
 plt.plot()
 Injured_CU_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Curveball Velocity', color = 'slateblue', density = True)
@@ -664,6 +682,8 @@ for key in injured.keys():
 Healthy_SWP_percentage_df = pd.DataFrame(healthy_SWP_percentages)
 Injured_SWP_percentage_df = pd.DataFrame(injured_SWP_percentages)
 
+print("Amount of Healthy Pitchers that throw Sweepers: " + str(Healthy_SWP_percentage_df.shape))
+print("Amount of Tommy John Pitchers that throw Sweepers: "+ str(Injured_SWP_percentage_df.shape))
 
 plt.plot()
 Healthy_SWP_percentage_df[0].hist(bins = 10, alpha= 0.7, label = 'Healthy Pitcher Sweeper Percentage', density = True)
@@ -693,6 +713,9 @@ for key in injured.keys():
       injured_SPL_percentages.append(percentage)
 Healthy_SPL_percentage_df = pd.DataFrame(healthy_SPL_percentages)
 Injured_SPL_percentage_df = pd.DataFrame(injured_SPL_percentages)
+
+print("Amount of Healthy Pitchers that throw Splitters: " + str(Healthy_SPL_percentage_df.shape))
+print("Amount of Tommy John Pitchers that throw Splitters: "+ str(Injured_SPL_percentage_df.shape))
 
 plt.plot()
 Healthy_SPL_percentage_df[0].hist(bins = 10, alpha= 0.7, label = 'Healthy Pitcher Splitter Percentage', density = True)
@@ -727,4 +750,112 @@ plt.plot()
 Healthy_SI_percentage_df[0].hist(bins = 30, alpha= 0.7, label = 'Healthy Pitcher Sinker Percentage', density = True)
 Injured_SI_percentage_df[0].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Sinker Percentage', density = True)
 plt.legend()
+plt.show()
+
+healthy_CH_percentages = []
+for key in healthy.keys():
+  x = len(healthy[key][1])
+  y = len(healthy[key][11])
+  try:
+    percentage = y/x *100
+  except:
+    percentage = 0
+  if percentage != 0:
+    healthy_CH_percentages.append(percentage)
+injured_CH_percentages = []
+for key in injured.keys():
+  x = len(injured[key][1])
+  y = len(injured[key][11])
+  try:
+    percentage = y/x *100
+  except ZeroDivisionError:
+    percentage = 0
+  if percentage != 0:
+      injured_CH_percentages.append(percentage)
+Healthy_CH_percentage_df = pd.DataFrame(healthy_CH_percentages)
+Injured_CH_percentage_df = pd.DataFrame(injured_CH_percentages)
+
+print("Amount of Healthy Pitchers that throw Changeups: " + str(Healthy_CH_percentage_df.shape))
+print("Amount of Tommy John Pitchers that throw Changeups: "+ str(Injured_CH_percentage_df.shape))
+
+plt.plot()
+Healthy_CH_percentage_df[0].hist(bins = 30, alpha= 0.7, label = 'Healthy Pitcher Changeup Percentage', density = True)
+Injured_CH_percentage_df[0].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Changeup Percentage', density = True)
+plt.legend()
+plt.show()
+
+
+healthy_CU_percentages = []
+for key in healthy.keys():
+  x = len(healthy[key][1])
+  y = len(healthy[key][15])
+  try:
+    percentage = y/x *100
+  except:
+    percentage = 0
+  if percentage != 0:
+    healthy_CU_percentages.append(percentage)
+injured_CU_percentages = []
+for key in injured.keys():
+  x = len(injured[key][1])
+  y = len(injured[key][15])
+  try:
+    percentage = y/x *100
+  except ZeroDivisionError:
+    percentage = 0
+  if percentage != 0:
+      injured_CU_percentages.append(percentage)
+Healthy_CU_percentage_df = pd.DataFrame(healthy_CU_percentages)
+Injured_CU_percentage_df = pd.DataFrame(injured_CU_percentages)
+
+print("Amount of Healthy Pitchers that throw Curveballs: " + str(Healthy_CU_percentage_df.shape))
+print("Amount of Tommy John Pitchers that throw Curveballs: "+ str(Injured_CU_percentage_df.shape))
+
+
+plt.plot()
+Healthy_CU_percentage_df[0].hist(bins = 30, alpha= 0.7, label = 'Healthy Pitcher Curveball Percentage', density = True)
+Injured_CU_percentage_df[0].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Curveball Percentage', density = True)
+plt.legend()
+plt.show()
+
+healthy_FC_percentages = []
+for key in healthy.keys():
+  x = len(healthy[key][1])
+  y = len(healthy[key][10])
+  try:
+    percentage = y/x *100
+  except:
+    percentage = 0
+  if percentage != 0:
+    healthy_FC_percentages.append(percentage)
+injured_FC_percentages = []
+for key in injured.keys():
+  x = len(injured[key][1])
+  y = len(injured[key][10])
+  try:
+    percentage = y/x *100
+  except ZeroDivisionError:
+    percentage = 0
+  if percentage != 0:
+      injured_FC_percentages.append(percentage)
+Healthy_FC_percentage_df = pd.DataFrame(healthy_FC_percentages)
+Injured_FC_percentage_df = pd.DataFrame(injured_FC_percentages)
+
+print("Amount of Healthy Pitchers that throw Cutters: " + str(Healthy_FC_percentage_df.shape))
+print("Amount of Tommy John Pitchers that throw Cutters: "+ str(Injured_FC_percentage_df.shape))
+
+
+plt.plot()
+Healthy_FC_percentage_df[0].hist(bins = 30, alpha= 0.7, label = 'Healthy Pitcher Cutter Percentage', density = True)
+Injured_FC_percentage_df[0].hist(bins = 30, alpha = 0.7, label = 'Tommy John Pitcher Cutter Percentage', density = True)
+plt.legend()
+plt.show()
+
+
+plt.plot()
+for key in injured.keys():
+  set = injured[key][8]
+  sns.scatterplot(data = set, x = 'release_speed', y= 'release_pos_z', alpha = 0.75, c = 'Blue')
+plt.title("Fastball Velocity vs Release Height Data for Tommy John")
+plt.xlim(85, 120)
 plt.show()
