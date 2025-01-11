@@ -8,6 +8,10 @@ import seaborn as sns
 from pybaseball import player_search_list
 import random
 import os
+from sklearn.linear_model import LinearRegression
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
 
 healthy_path = "./.data/healthy/"
 injured_path = "./.data/injured/"
@@ -52,4 +56,37 @@ combined_data = injured_data + healthy_data
 
 combined_df = pd.concat(combined_data)
 
-print(combined_data.head())
+print(combined_df.head())
+
+X = combined_df[['release_speed', 'release_pos_z']]
+y = combined_df['TJ']
+
+scaler = StandardScaler()
+X = scaler.fit_transform(X)  # Standardize features
+
+# Initialize PCA and fit to data
+pca = PCA(n_components=5)  # Choose 5 components (you can adjust this)
+X_pca = pca.fit_transform(X)
+
+# Check explained variance ratio
+print("Explained Variance Ratio:", pca.explained_variance_ratio_)
+print("Cumulative Explained Variance:", np.cumsum(pca.explained_variance_ratio_))
+
+# Optional: Scree plot to decide number of components
+plt.figure(figsize=(8, 6))
+plt.plot(np.cumsum(pca.explained_variance_ratio_), marker='o')
+plt.xlabel('Number of Components')
+plt.ylabel('Cumulative Explained Variance')
+plt.title('Scree Plot')
+plt.show()
+
+# Initialize and fit the regression model
+model = LinearRegression()
+model.fit(X_pca, y)
+
+# Check the model's performance
+y_pred = model.predict(X_pca)
+print("R-squared Score:", r2_score(y, y_pred))
+
+# View the regression coefficients for each principal component
+print("Regression Coefficients:", model.coef_)
