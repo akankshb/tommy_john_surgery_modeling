@@ -859,3 +859,33 @@ for key in injured.keys():
 plt.title("Fastball Velocity vs Release Height Data for Tommy John")
 plt.xlim(85, 120)
 plt.show()
+
+
+healthy_days_rest = []
+for key in healthy.keys():
+  x = healthy[key][1]
+  y = []
+  for i in x.values:
+    y.append(False)
+  z = x.assign(TJ = y)
+  healthy_days_rest.append(z)
+
+injured_days_rest = []
+for key in injured.keys():
+  x = injured[key][1]
+  y = []
+  for i in x.values:
+    y.append(True)
+  z = x.assign(TJ = y)
+  injured_days_rest.append(z)
+healthy_days_rest_df = pd.concat(healthy_days_rest)
+injured_days_rest_df = pd.concat(injured_days_rest)
+
+plt.plot()
+injured_days_rest_df['pitcher_days_since_prev_game'].hist(bins = 20, alpha = 0.6, label = 'Tommy John Pitcher Days Rest', color = 'red', density = True)
+healthy_days_rest_df['pitcher_days_since_prev_game'].hist(bins = 20, alpha = 0.6, label = 'Healthy Pitchers Days Rest', color = 'blue', density = True)
+plt.xlim(-5, 15)
+plt.xlabel("Days Rest")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()

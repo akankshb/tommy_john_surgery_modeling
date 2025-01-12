@@ -11,7 +11,7 @@ import os
 from sklearn.linear_model import LinearRegression
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
-
+from sklearn.metrics import r2_score
 
 healthy_path = "./.data/healthy/"
 injured_path = "./.data/injured/"
@@ -23,9 +23,12 @@ injured_data = []
 def valuegen_healthy(file):
     data = pd.read_csv(file)
     TJ_Values = []
-    for i in data.values:
+    columns_to_check = ['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']  # Replace with your column names
+    data_cleaned = data.dropna(subset=columns_to_check)
+    # data = data.drop(data[(data['release_speed'] == None) or (data['release_pos_z'] == None)].index)
+    for i in data_cleaned.values:
         TJ_Values.append(False)
-    new_data = data.assign(TJ = TJ_Values)
+    new_data = data_cleaned.assign(TJ = TJ_Values)
     healthy_data.append(new_data)
     return new_data.head()
 
@@ -39,9 +42,12 @@ for filename in os.listdir(healthy_path):
 def valuegen_injured(file):
     data = pd.read_csv(file)
     TJ_Values = []
-    for i in data.values:
+    # data = data.drop(data[data['release_speed'] == None or data['release_pos_z'] == None].index)
+    columns_to_check = ['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']  # Replace with your column names
+    data_cleaned = data.dropna(subset=columns_to_check)
+    for i in data_cleaned.values:
         TJ_Values.append(True)
-    new_data = data.assign(TJ = TJ_Values)
+    new_data = data_cleaned.assign(TJ = TJ_Values)
     injured_data.append(new_data)
     return new_data.head()
 
@@ -56,16 +62,16 @@ combined_data = injured_data + healthy_data
 
 combined_df = pd.concat(combined_data)
 
-print(combined_df.head())
+# print(combined_df.head())
 
-X = combined_df[['release_speed', 'release_pos_z']]
+X = combined_df[['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']]
 y = combined_df['TJ']
 
 scaler = StandardScaler()
 X = scaler.fit_transform(X)  # Standardize features
 
 # Initialize PCA and fit to data
-pca = PCA(n_components=5)  # Choose 5 components (you can adjust this)
+pca = PCA(n_components=7)  # Choose 5 components (you can adjust this)
 X_pca = pca.fit_transform(X)
 
 # Check explained variance ratio
@@ -90,3 +96,16 @@ print("R-squared Score:", r2_score(y, y_pred))
 
 # View the regression coefficients for each principal component
 print("Regression Coefficients:", model.coef_)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(y, y_pred, edgecolor='k', alpha=0.7)
+plt.xlabel("Actual Column 9")
+plt.ylabel("Predicted Column 9")
+plt.title("Actual vs Predicted (Using PCA)")
+plt.show()
+
+loadings = pca.components_
+print("Loadings:\n", loadings)
+
+feature_importance = np.abs(loadings).sum(axis=0)
+print("Overall Feature Importance:", feature_importance)
