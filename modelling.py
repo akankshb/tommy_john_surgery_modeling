@@ -78,7 +78,6 @@ X_pca = pca.fit_transform(X)
 print("Explained Variance Ratio:", pca.explained_variance_ratio_)
 print("Cumulative Explained Variance:", np.cumsum(pca.explained_variance_ratio_))
 
-# Optional: Scree plot to decide number of components
 plt.figure(figsize=(8, 6))
 plt.plot(np.cumsum(pca.explained_variance_ratio_), marker='o')
 plt.xlabel('Number of Components')
@@ -94,16 +93,10 @@ model.fit(X_pca, y)
 y_pred = model.predict(X_pca)
 print("R-squared Score:", r2_score(y, y_pred))
 
-# View the regression coefficients for each principal component
+# the regression coefficients for each principal component
 print("Regression Coefficients:", model.coef_)
 
-plt.figure(figsize=(8, 6))
-plt.scatter(y, y_pred, edgecolor='k', alpha=0.7)
-plt.xlabel("Actual Column 9")
-plt.ylabel("Predicted Column 9")
-plt.title("Actual vs Predicted (Using PCA)")
-plt.show()
-
+# Finding the important features
 loadings = pca.components_
 print("Loadings:\n", loadings)
 
