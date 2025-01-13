@@ -12,6 +12,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import r2_score
+from sklearn.manifold import TSNE
+
 
 healthy_path = "./.data/healthy/"
 injured_path = "./.data/injured/"
@@ -78,12 +80,12 @@ X_pca = pca.fit_transform(X)
 print("Explained Variance Ratio:", pca.explained_variance_ratio_)
 print("Cumulative Explained Variance:", np.cumsum(pca.explained_variance_ratio_))
 
-plt.figure(figsize=(8, 6))
-plt.plot(np.cumsum(pca.explained_variance_ratio_), marker='o')
-plt.xlabel('Number of Components')
-plt.ylabel('Cumulative Explained Variance')
-plt.title('Scree Plot')
-plt.show()
+# plt.figure(figsize=(8, 6))
+# plt.plot(np.cumsum(pca.explained_variance_ratio_), marker='o')
+# plt.xlabel('Number of Components')
+# plt.ylabel('Cumulative Explained Variance')
+# plt.title('Scree Plot')
+# plt.show()
 
 # Initialize and fit the regression model
 model = LinearRegression()
@@ -102,3 +104,25 @@ print("Loadings:\n", loadings)
 
 feature_importance = np.abs(loadings).sum(axis=0)
 print("Overall Feature Importance:", feature_importance)
+
+# Accessing all the numerical data points we need
+TSNE_dataset = combined_df[['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']]
+# Running the t-SNE
+tsne = TSNE(learning_rate = 100) # Adjust learning rate
+# Transform the features
+tsne_features = tsne.fit_transform(TSNE_dataset)
+
+# Assign to 2D array
+tsne_features[1:4,:]
+
+combined_df['x'] = tsne_features[:,0]
+
+combined_df['y'] = tsne_features[:,1]
+
+
+#Creating t-SNE scatterplot
+plt.plot()
+
+sns.scatterplot(x='x', y= 'y', hue= 'TJ', data = combined_df, alpha = 0.5)
+
+plt.show()
