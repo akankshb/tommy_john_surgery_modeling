@@ -108,7 +108,7 @@ print("Overall Feature Importance:", feature_importance)
 # Accessing all the numerical data points we need
 TSNE_dataset = combined_df[['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']]
 # Running the t-SNE
-tsne = TSNE(learning_rate = 100) # Adjust learning rate
+tsne = TSNE(learning_rate = 200) # Adjust learning rate
 # Transform the features
 tsne_features = tsne.fit_transform(TSNE_dataset)
 
@@ -123,6 +123,6 @@ combined_df['y'] = tsne_features[:,1]
 #Creating t-SNE scatterplot
 plt.plot()
 
-sns.scatterplot(x='x', y= 'y', hue= 'TJ', data = combined_df, alpha = 0.5)
+sns.scatterplot(x='x', y= 'y', hue= 'TJ', data = combined_df, alpha = 0.5, style = 'TJ')
 
 plt.show()
