@@ -25,7 +25,8 @@ injured_data = []
 def valuegen_healthy(file):
     data = pd.read_csv(file)
     TJ_Values = []
-    columns_to_check = ['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']  # Replace with your column names
+    columns_to_check = ['release_extension', 'release_speed', 'release_pos_x', 'release_pos_z', 'release_pos_y', 'spin_axis', 'pitcher_days_since_prev_game', 'release_spin_rate', 'arm_angle']
+    # Replace with your column names
     data_cleaned = data.dropna(subset=columns_to_check)
     # data = data.drop(data[(data['release_speed'] == None) or (data['release_pos_z'] == None)].index)
     for i in data_cleaned.values:
@@ -45,7 +46,7 @@ def valuegen_injured(file):
     data = pd.read_csv(file)
     TJ_Values = []
     # data = data.drop(data[data['release_speed'] == None or data['release_pos_z'] == None].index)
-    columns_to_check = ['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']  # Replace with your column names
+    columns_to_check = ['release_extension', 'release_speed', 'release_pos_x', 'release_pos_z', 'release_pos_y', 'spin_axis', 'pitcher_days_since_prev_game', 'release_spin_rate', 'arm_angle']
     data_cleaned = data.dropna(subset=columns_to_check)
     for i in data_cleaned.values:
         TJ_Values.append(True)
@@ -66,7 +67,7 @@ combined_df = pd.concat(combined_data)
 
 # print(combined_df.head())
 
-X = combined_df[['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']]
+X = combined_df[['release_speed', 'release_pos_x', 'release_pos_z', 'release_pos_y', 'spin_axis', 'pitcher_days_since_prev_game', 'release_spin_rate', 'arm_angle']]
 y = combined_df['TJ']
 
 scaler = StandardScaler()
@@ -80,12 +81,12 @@ X_pca = pca.fit_transform(X)
 print("Explained Variance Ratio:", pca.explained_variance_ratio_)
 print("Cumulative Explained Variance:", np.cumsum(pca.explained_variance_ratio_))
 
-# plt.figure(figsize=(8, 6))
-# plt.plot(np.cumsum(pca.explained_variance_ratio_), marker='o')
-# plt.xlabel('Number of Components')
-# plt.ylabel('Cumulative Explained Variance')
-# plt.title('Scree Plot')
-# plt.show()
+plt.figure(figsize=(8, 6))
+plt.plot(np.cumsum(pca.explained_variance_ratio_), marker='o')
+plt.xlabel('Number of Components')
+plt.ylabel('Cumulative Explained Variance')
+plt.title('Scree Plot')
+plt.show()
 
 # Initialize and fit the regression model
 model = LinearRegression()
@@ -106,23 +107,23 @@ feature_importance = np.abs(loadings).sum(axis=0)
 print("Overall Feature Importance:", feature_importance)
 
 # Accessing all the numerical data points we need
-TSNE_dataset = combined_df[['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']]
-# Running the t-SNE
-tsne = TSNE(learning_rate = 10) # Adjust learning rate
-# Transform the features
-tsne_features = tsne.fit_transform(TSNE_dataset)
+# TSNE_dataset = combined_df[['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']]
+# # Running the t-SNE
+# tsne = TSNE(learning_rate = 10) # Adjust learning rate
+# # Transform the features
+# tsne_features = tsne.fit_transform(TSNE_dataset)
 
-# Assign to 2D array
-tsne_features[1:4,:]
+# # Assign to 2D array
+# tsne_features[1:4,:]
 
-combined_df['x'] = tsne_features[:,0]
+# combined_df['x'] = tsne_features[:,0]
 
-combined_df['y'] = tsne_features[:,1]
+# combined_df['y'] = tsne_features[:,1]
 
 
-#Creating t-SNE scatterplot
-plt.plot()
+# #Creating t-SNE scatterplot
+# plt.plot()
 
-sns.scatterplot(x='x', y= 'y', hue= 'TJ', data = combined_df, alpha = 0.5, style = 'TJ')
+# sns.scatterplot(x='x', y= 'y', hue= 'TJ', data = combined_df, alpha = 0.5, style = 'TJ')
 
-plt.show()
+# plt.show()
