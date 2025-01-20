@@ -9,11 +9,10 @@ from sklearn.metrics import accuracy_score, roc_auc_score, classification_report
 import matplotlib.pyplot as plt
 from xgboost import plot_importance
 
-# Example dataset
+
 data = pd.read_csv("./.data/all_filtered_data.csv")
 
-# Ensure data contains features and target
-# Example columns: ['Player', 'Year', 'IP', 'Velocity', 'BB%', 'SO%', 'Injury_Risk']
+
 print(data.head())
 
 # Define features and target

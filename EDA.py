@@ -74,6 +74,37 @@ print(len(healthy))
 print(len(injured))
 
 
+healthy_data = []
+for key in healthy.keys():
+  x = healthy[key][1]
+  y = []
+  for i in x.values:
+    y.append(0)
+  z = x.assign(TJ = y)
+  healthy_data.append(z)
+injured_data = []
+for key in injured.keys():
+  x = injured[key][1]
+  y = []
+  for i in x.values:
+    y.append(1)
+  z = x.assign(TJ = y)
+  injured_data.append(z)
+# for key in unhealthy.keys():
+#   x = unhealthy[key][8]
+#   Fastball_data.append(x)
+Healthy_df = pd.concat(healthy_data)
+Injured_df = pd.concat(injured_data)
+
+plt.plot()
+Injured_df['p_throws'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Handedness')
+Healthy_df['p_throws'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Handedness')
+plt.xlabel("Handedness")
+plt.ylabel("Frequency")
+plt.legend()
+plt.show()
+print(Healthy_df.shape)
+print(Injured_df.shape)
 healthy_Fastball_data = []
 for key in healthy.keys():
   x = healthy[key][7]
