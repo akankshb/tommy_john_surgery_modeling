@@ -16,7 +16,7 @@ data = pd.read_csv("./.data/all_filtered_data.csv")
 print(data.head())
 
 # Define features and target
-X = data[['release_speed', 'release_pos_x', 'release_pos_z', 'release_pos_y', 'spin_axis', 'pitcher_days_since_prev_game', 'release_spin_rate', 'arm_angle']]
+X = data[['release_extension', 'release_speed', 'release_pos_x', 'release_pos_z', 'release_pos_y', 'spin_axis', 'pitcher_days_since_prev_game', 'release_spin_rate', 'arm_angle']]
 y = data['TJ']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -46,10 +46,6 @@ y_pred_proba = xgb_model.predict_proba(X_test)[:, 1]  # For AUC-ROC
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.2f}")
 
-# AUC-ROC Score
-roc_auc = roc_auc_score(y_test, y_pred_proba)
-print(f"AUC-ROC: {roc_auc:.2f}")
-
 # Classification Report
 print("Classification Report:")
 print(classification_report(y_test, y_pred))
@@ -65,7 +61,4 @@ plot_importance(xgb_model)
 plt.show()
 
 # Save the model
-joblib.dump(xgb_model, './models/xg_boost_tj_risk_model_v1.pkl')
-
-# Load the model later
-loaded_model = joblib.load('xg_boost_tj_risk_model_v1.pkl')
+joblib.dump(xgb_model, './.data/xg_boost_tj_risk_model_v1.pkl')

@@ -5,6 +5,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import joblib
 import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 data = pd.read_csv("./.data/all_filtered_data.csv")
@@ -48,17 +50,28 @@ importance_df = pd.DataFrame({
     'Importance': importances
 }).sort_values(by='Importance', ascending=False)
 
-# Plot feature importances
-plt.figure(figsize=(8, 6))
-plt.barh(importance_df['Feature'], importance_df['Importance'], color='skyblue')
-plt.gca().invert_yaxis()  # Highest importance on top
-plt.xlabel('Feature Importance')
-plt.ylabel('Feature')
-plt.title('Random Forest Feature Importance')
-plt.show()
 
 # Save the model to a file
 joblib.dump(rf_model, './.data/tommy_john_risk_model_v1.pkl')
 
-# Load the model (for future use)
-loaded_model = joblib.load('./.data/tommy_john_risk_model_v1.pkl')
+
+feature_importances = rf_model.feature_importances_
+feature_names = X.columns
+
+
+# Sort feature importances in descending order
+sorted_idx = np.argsort(feature_importances)[::-1]
+
+# Sort features and their importance values
+sorted_feature_names = feature_names[sorted_idx]
+sorted_importances = feature_importances[sorted_idx]
+
+# Plot the feature importances
+plt.figure(figsize=(8, 6))
+plt.bar(sorted_feature_names, sorted_importances, color="skyblue")
+plt.xlabel("Features")
+plt.ylabel("Importance Score")
+plt.title("Feature Importance from Random Forest")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()

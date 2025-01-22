@@ -67,7 +67,7 @@ combined_df = pd.concat(combined_data)
 
 # print(combined_df.head())
 
-X = combined_df[['release_speed', 'release_pos_x', 'release_pos_z', 'release_pos_y', 'spin_axis', 'pitcher_days_since_prev_game', 'release_spin_rate', 'arm_angle']]
+X = combined_df[['release_extension', 'release_speed', 'release_pos_x', 'release_pos_z', 'release_pos_y', 'spin_axis', 'pitcher_days_since_prev_game', 'release_spin_rate', 'arm_angle']]
 y = combined_df['TJ']
 
 scaler = StandardScaler()
@@ -88,23 +88,26 @@ plt.ylabel('Cumulative Explained Variance')
 plt.title('Scree Plot')
 plt.show()
 
-# Initialize and fit the regression model
-model = LinearRegression()
-model.fit(X_pca, y)
+# Feature loadings
+loadings = pca.components_  # Loadings matrix
+features = ['release_extension', 'release_speed', 'release_pos_x', 'release_pos_z', 'release_pos_y', 'spin_axis', 'pitcher_days_since_prev_game', 'release_spin_rate', 'arm_angle']
 
-# Check the model's performance
-y_pred = model.predict(X_pca)
-print("R-squared Score:", r2_score(y, y_pred))
+# Creating a DataFrame to visualize the loadings
+loadings_df = pd.DataFrame(loadings.T, columns=[f"PC{i+1}" for i in range(pca.n_components_)], index=features)
+print("Feature Loadings (Importance for Each Component):", loadings_df)
 
-# the regression coefficients for each principal component
-print("Regression Coefficients:", model.coef_)
-
-# Finding the important features
-loadings = pca.components_
-print("Loadings:\n", loadings)
-
-feature_importance = np.abs(loadings).sum(axis=0)
+# Calculate overall importance for each feature (sum of absolute values of loadings)
+feature_importance = loadings_df.abs().sum(axis=1).sort_values(ascending=False)
 print("Overall Feature Importance:", feature_importance)
+
+# Plot overall feature importance
+plt.figure(figsize=(10, 6))
+feature_importance.plot(kind='bar', color='skyblue')
+plt.title("Overall Feature Importance")
+plt.xlabel("Features")
+plt.ylabel("Importance (Sum of Absolute Loadings)")
+plt.xticks(rotation=45)
+plt.show()
 
 # Accessing all the numerical data points we need
 # TSNE_dataset = combined_df[['release_speed', 'release_pos_z', 'release_spin_rate', 'release_pos_x', 'release_extension', 'spin_axis', 'pitcher_days_since_prev_game']]
