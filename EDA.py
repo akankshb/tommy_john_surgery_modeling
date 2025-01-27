@@ -1,3 +1,5 @@
+## It'd be great if you put some comments on the code snippets
+## They'll guide the users to where to look in the code.  
 from pybaseball import playerid_lookup
 from pybaseball import statcast_pitcher
 from pybaseball import statcast_pitcher_spin
@@ -130,10 +132,12 @@ Injured_df = pd.concat(injured_Fastball_data)
 plt.plot()
 Injured_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Velocity', density = True)
 Healthy_df['release_speed'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Velocity', density = True)
-plt.xlabel("Velocity")
-plt.ylabel("Frequency")
+plt.xlabel("Release Speed")
+plt.ylabel("Counts")
 plt.legend()
 plt.show()
+plt.savefig('data/plots/first.png', dpi = 400)
+
 plt.plot()
 Injured_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Tommy John Pitcher Release Height', density = True)
 Healthy_df['release_pos_z'].hist(bins = 60, alpha = 0.7, label = 'Regular Pitchers Release Height', density = True)
